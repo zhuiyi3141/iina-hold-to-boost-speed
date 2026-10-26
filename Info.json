@@ -1,0 +1,24 @@
+{
+  "name": "Hold to Boost Speed",
+  "identifier": "com.zhuiyi3141.iina.hold-speed",
+  "version": "1.3.0",
+  "author": {
+    "name": "zhuiyi3141",
+    "url": "https://github.com/zhuiyi3141"
+  },
+  "description": "长按 → 以 2× 播放、长按 ← 以 3× 播放，松开立刻恢复原速；短按保留 IINA 原生的快进 / 快退。倍速、快进秒数与长按阈值均可自定义。",
+  "entry": "main.js",
+  "globalEntry": "global.js",
+  "permissions": [
+    "show-osd"
+  ],
+  "preferencesPage": "pref.html",
+  "preferenceDefaults": {
+    "rightSpeed": 2.0,
+    "leftSpeed": 3.0,
+    "seekSeconds": 5,
+    "longMs": 250
+  },
+  "ghRepo": "zhuiyi3141/iina-hold-to-boost-speed",
+  "ghVersion": 1
+}

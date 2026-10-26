@@ -1,0 +1,7 @@
+.DS_Store
+
+# 打包产物（由 CI 生成并发布到 Releases）
+*.iinaplgz
+
+# 本地调试日志
+debug.log

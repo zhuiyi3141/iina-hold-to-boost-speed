@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hold to Boost Speed 设置</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { margin: 0; padding: 0; }
+    body {
+      margin: 0; padding: 16px; font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .pref-section { margin-bottom: 14px; }
+    label { font-weight: 600; }
+    .help { margin-top: 3px; color: rgba(0,0,0,0.5); font-size: 11px; line-height: 1.5; }
+    input[type="number"] { width: 6em; margin-top: 4px; }
+    hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 18px 0 14px; }
+    .status { font-size: 11px; margin-top: 6px; line-height: 1.55; }
+    .ok { color: #1a7f37; }
+    .warn { color: #b35900; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10.5px; background: rgba(0,0,0,0.06);
+      padding: 1px 4px; border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="pref-section">
+    <label>长按 → 时的倍速</label>
+    <div><input type="number" data-pref-key="rightSpeed" data-type="float" step="0.5" min="1" max="8" value="2.0" /></div>
+    <p class="help">按住右方向键超过长按阈值时的播放倍速，默认 2 倍速。</p>
+  </div>
+
+  <div class="pref-section">
+    <label>长按 ← 时的倍速</label>
+    <div><input type="number" data-pref-key="leftSpeed" data-type="float" step="0.5" min="1" max="8" value="3.0" /></div>
+    <p class="help">按住左方向键超过长按阈值时的播放倍速，默认 3 倍速。</p>
+  </div>
+
+  <div class="pref-section">
+    <label>短按快进秒数</label>
+    <div><input type="number" data-pref-key="seekSeconds" data-type="int" min="1" max="600" value="5" /></div>
+    <p class="help">短按方向键时快进 / 快退的秒数，默认 5 秒（与 IINA 原生一致）。</p>
+  </div>
+
+  <div class="pref-section">
+    <label>长按判定阈值（毫秒）</label>
+    <div><input type="number" data-pref-key="longMs" data-type="int" min="100" max="1000" step="10" value="250" /></div>
+    <p class="help">按下后超过该毫秒数 = 长按（加速）；更早松开 = 短按（快进 / 快退）。数值越小越容易触发加速。</p>
+  </div>
+
+  <hr />
+
+  <div class="pref-section">
+    <label>输入配置</label>
+    <p class="help">
+      本插件需要一条配套的输入配置，才能让方向键的「按下」事件到达插件
+      （否则会被 IINA 的菜单快捷键吃掉）。这条配置不会改变方向键的手感：
+      关掉插件后，方向键仍等同于 IINA 原装的快进 / 快退。
+    </p>
+    <p class="help">
+      手动安装：把插件包内的 <code>input.conf</code> 拷贝到<br />
+      <code>~/Library/Application Support/com.colliderli.iina/input_conf/holdspeed.conf</code><br />
+      然后在 IINA「设置 → 快捷键 → 输入配置」里选择 <code>holdspeed</code>，重启 IINA。
+    </p>
+  </div>
+</body>
+</html>
