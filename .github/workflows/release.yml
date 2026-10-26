@@ -1,0 +1,44 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: meta
+        run: |
+          VERSION=$(python3 -c "import json;print(json.load(open('Info.json'))['version'])")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Version: $VERSION"
+
+      - name: Pack plugin
+        run: |
+          PACKER="/Applications/IINA.app/Contents/MacOS/iina-plugin"
+          if [ ! -x "$PACKER" ]; then
+            echo "::warning::iina-plugin not found, falling back to zip"
+            zip -r "hold-to-boost-speed-${{ steps.meta.outputs.version }}.iinaplgz" \
+              Info.json main.js global.js pref.html input.conf README.md LICENSE
+          else
+            "$PACKER" pack .
+            OUT=$(ls -t *.iinaplgz | head -1)
+            mv "$OUT" "hold-to-boost-speed-${{ steps.meta.outputs.version }}.iinaplgz"
+          fi
+          ls -la *.iinaplgz
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: hold-to-boost-speed-*.iinaplgz
+          generate_release_notes: true
+          draft: false
+          name: v${{ steps.meta.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
