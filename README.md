@@ -5,7 +5,6 @@
 [![IINA](https://img.shields.io/badge/IINA-%E2%89%A51.4-blue)](https://iina.io)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![macOS](https://img.shields.io/badge/macOS-%E2%89%A511-lightgrey)](https://www.apple.com/macos/)
-
 <p align="center">
     <a href="https://linux.do" alt="LINUX DO">
         <img
